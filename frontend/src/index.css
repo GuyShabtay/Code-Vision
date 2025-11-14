@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* רקע הקוד הכללי */
+.cm-editor {
+  /* background-color: rgb(213, 213, 255,0.7) !important;  */
+  background: transparent;
+    backdrop-filter: blur(5px);
+
+  color: #000000 !important;            /* טקסט שחור */
+}
+
+/* רקע המיספור */
+.cm-gutters {
+  background: transparent;
+    backdrop-filter: blur(5px);
+    /* border-radius: 15px; */
+  /* border-right: 1px solid #d4d4d4; */
+}
+
+/* רקע של מספר השורה בפוקוס */
+.cm-gutters .cm-activeLineGutter {
+  background-color: #fde68a !important; /* צהוב כהה יותר להדגשה */
+  color: #000000 !important;            /* מספר השורה שחור */
+  font-weight: bold;
+                     
+
+}
+.cm-activeLineGutter {
+      /* border-radius: 15px; */
+
+}
+/* html, body, #root {
+  height: 100vh;
+} */
+
+
+
+
+
+
+
+.glass-container {
+  position: relative;
+  /* border: 1px solid rgba(255, 255, 255, 0.3);  */
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2); /* subtle shadow */
+  background: transparent;
+  backdrop-filter: blur(2px); /* glass blur effect */
+  /* -webkit-backdrop-filter: blur(8px); */
+  border-radius: 1rem;
+  /* padding: 2rem; */
+  width: 300px;
+  max-width: 90%;
+  color: white;
+}

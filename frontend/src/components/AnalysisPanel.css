@@ -1,0 +1,42 @@
+.analysis-panel {
+  margin-top: 50px;
+  background: transparent;
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  /* max-height: 400px; */
+  /* overflow: auto; */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  width: 90%;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 1.125rem; /* text-lg */
+  margin-bottom: 0.25rem;
+}
+
+.section-text {
+  margin-bottom: 0.5rem;
+}
+
+.code-block {
+  /* background-color: #151519; */
+    /* background: linear-gradient(-142deg, #313142 0%, #050505 100%); */
+    background: linear-gradient(150deg, #313142 0%, #050505 100%);
+
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  overflow: auto;
+  width: fit-content;
+}
+
+.raw-block {
+  background-color: #111111;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  overflow: auto;
+}

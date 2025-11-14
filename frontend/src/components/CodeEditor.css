@@ -1,0 +1,31 @@
+.code-editor-container {
+  width: 90% !important;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* glass border */
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2); /* subtle shadow */
+  border-radius: 15px;
+  margin-bottom: 50px;
+}
+
+.buttons-container {
+  display: flex;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+}
+
+#analyze-lines-btn {
+   box-shadow: 0 8px 15px rgba(155, 74, 255,0.2); /* subtle shadow */
+   color: rgb(155, 74, 255);
+  border: 1px solid rgba(155, 74, 255,0.5); /* glass border */
+
+
+}
+
+#analyze-lines-btn:hover {
+}
+
+#analyze-full-btn {
+  
+}
+
+#analyze-full-btn:hover {
+}
