@@ -34,14 +34,14 @@ export default function CodeEditor({ code, onAnalyzeLines, onAnalyzeFull }: Prop
         ]}
       />
 
-      <div className="buttons-container">
+      {/* <div className="buttons-container">
         <button className="glass-container" id="analyze-lines-btn" onClick={() => onAnalyzeLines(selectedText)}>
           Analyze Selected Lines
         </button>
         <button className="glass-container" id="analyze-full-btn" onClick={onAnalyzeFull}>
           Analyze Full Code
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

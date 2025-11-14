@@ -3,7 +3,19 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 50px;
+  padding-top: 300px;
 }
+
+/* App.css or Title.css */
+.title-container {
+  position: fixed; /* stays on top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
 
 
 .history-list {

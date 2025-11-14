@@ -12,6 +12,8 @@ import './App.css';
 import Title from "./components/Title";
 import FancyButton from "./components/FancyButton";
 import Loader from "./components/Loader";
+import History from "./components/History";
+import FadeOnScroll from "./components/FadeOnScroll";
 
 type Analysis = {
   code: string;
@@ -22,6 +24,7 @@ type Analysis = {
     improvedCode?: string;
     raw?: string;
   };
+  title?: string;
 };
 
 export default function App() {
@@ -33,106 +36,80 @@ function sum(a, b) {
 }
 console.log(sum(2, 3));
 `);
-
   const [modalItem, setModalItem] = useState<Analysis | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const analyzeSelected = async (selectedCode: string) => {
-    if (!selectedCode) return;
-    await analyzeCode(selectedCode);
+  const analyzeCode = async (code: string) => {
+    setLoading(true);
+    try {
+      const res = await axios.post("http://localhost:5001/api/ai/analyze", { code });
+      const result = res.data;
+
+      const title = code.split(/\s+/).slice(0, 4).join(" ");
+      setAnalysis(result);
+      setHistory(prev => [{ code, result, title }, ...prev]);
+      setCurrentCode(code);
+    } catch (err) {
+      console.error(err);
+      const errorResult = { raw: "Error fetching analysis" };
+      const title = code.split(/\s+/).slice(0, 4).join(" ");
+      setAnalysis(errorResult);
+      setHistory(prev => [{ code, result: errorResult, title }, ...prev]);
+      setCurrentCode(code);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const analyzeFull = async () => {
     await analyzeCode(currentCode);
   };
 
-// inside analyzeCode function
-const analyzeCode = async (code: string) => {
-  try {
-    const res = await axios.post("http://localhost:5001/api/ai/analyze", { code });
-    const result = res.data;
-
-    const title = code.split(/\s+/).slice(0, 4).join(" "); // first 1-4 words
-    setAnalysis(result);
-    setHistory(prev => [{ code, result, title }, ...prev]);
-    setCurrentCode(code);
-  } catch (err) {
-    console.error(err);
-    const errorResult = { raw: "Error fetching analysis" };
-    const title = code.split(/\s+/).slice(0, 4).join(" ");
-    setAnalysis(errorResult);
-    setHistory(prev => [{ code, result: errorResult, title }, ...prev]);
-    setCurrentCode(code);
-  }
-};
-
-  const openModal = (item: Analysis) => {
-    setModalItem(item);
-  };
-
-  const closeModal = () => {
-    setModalItem(null);
-  };
-
-  const analyzeFromModal = async () => {
-    if (!modalItem) return;
-    await analyzeCode(modalItem.code);
-    closeModal();
-  };
-
-  
-
   return (
-    <div id='app' className="relative w-full h-full bg-background">
+    <div id="app" className="relative w-full h-full bg-background">
       <GradientBg />
-      {/* <div className="glass-container">hi there</div> */}
-<Title/>
-<AnalaysisCards />
-
-      <CodeEditor
-        code={currentCode}
-        onAnalyzeLines={analyzeSelected}
-        onAnalyzeFull={analyzeFull}
-        />
-        <div onClick={analyzeFull}>
-        <FancyButton/>
-        </div>
-        <Loader/>
-      <AnalysisPanel analysis={analysis} />
-
-      {/* History Cards */}
-      <div className="history-list">
-        <h3>History:</h3>
-        <div className="history-cards">
-  {history.map((item, idx) => (
-    <motion.div
-      key={idx}
-      layoutId={`card-${idx}`}
-      className="history-card"
-      onClick={() => openModal(item)}
-    >
-      <CodeMirror
-        value={item.code}
-        height="250px"
-        theme={oneDark}
-        extensions={[javascript()]}
-        readOnly={true}
-        basicSetup={{
-          lineNumbers: true,
-          highlightActiveLine: false,
-          highlightActiveLineGutter: false,
-        }}
-      />
-      <div className="history-card-title">
-        {item.title}
-      </div>
-    </motion.div>
-  ))}
+     <div className="title-container">
+  <Title />
 </div>
 
-      </div>
+<FadeOnScroll fadeStart={200} fadeEnd={150}>
+  <AnalaysisCards />
+</FadeOnScroll>
+
+<FadeOnScroll fadeStart={200} fadeEnd={150}>
+  <CodeEditor
+    code={currentCode}
+    onAnalyzeLines={analyzeCode}
+    onAnalyzeFull={analyzeFull}
+  />
+</FadeOnScroll>
+
+<FadeOnScroll fadeStart={300} fadeEnd={150}>
+   <div className="buttons-container">
+      
+  <div onClick={analyzeFull}>
+    <FancyButton />
+  </div>
+  <div onClick={analyzeFull}>
+    <FancyButton />
+  </div>
+  </div>
+</FadeOnScroll>
+
+<FadeOnScroll fadeStart={300} fadeEnd={150}>
+  {loading ? <Loader /> : Object.keys(analysis).length > 0 ? <AnalysisPanel analysis={analysis} /> : null}
+</FadeOnScroll>
+
+<FadeOnScroll fadeStart={300} fadeEnd={150}>
+  <History history={history} onSelect={setModalItem} />
+</FadeOnScroll>
+
+
+
+
+
 
       {/* Modal */}
-      
       <AnimatePresence>
         {modalItem && (
           <motion.div
@@ -150,14 +127,28 @@ const analyzeCode = async (code: string) => {
                 height="300px"
                 theme={oneDark}
                 extensions={[javascript()]}
-                onChange={(value) => setModalItem({ ...modalItem, code: value })}
+                onChange={(value) =>
+                  setModalItem({ ...modalItem, code: value })
+                }
               />
               <AnalysisPanel analysis={modalItem.result} />
               <div className="modal-buttons">
-                <button className="analyze-modal-btn" onClick={analyzeFromModal}>
+                <button
+                  className="analyze-modal-btn"
+                  onClick={async () => {
+                    if (!modalItem) return;
+                    await analyzeCode(modalItem.code);
+                    setModalItem(null);
+                  }}
+                >
                   Analyze & Continue
                 </button>
-                <button className="close-modal-btn" onClick={closeModal}>Close</button>
+                <button
+                  className="close-modal-btn"
+                  onClick={() => setModalItem(null)}
+                >
+                  Close
+                </button>
               </div>
             </motion.div>
           </motion.div>
