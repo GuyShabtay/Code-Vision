@@ -52,31 +52,43 @@ console.log(sum(2, 3));
 
 
 
-  const analyzeCode = async (code: string) => {
-    setLoading(true);
-    try {
-      const res = await axios.post("http://localhost:5001/api/ai/analyze", { code });
-      const result = res.data;
+  const analyzeCode = async (code: string, updateEditor: boolean = true) => {
+  setLoading(true);
+  try {
+    const res = await axios.post("http://localhost:5001/api/ai/analyze", { code });
+    const result = res.data;
 
-      const title = code.split(/\s+/).slice(0, 4).join(" ");
-      setAnalysis(result);
-      setHistory(prev => [{ code, result, title }, ...prev]);
+    const title = code.split(/\s+/).slice(0, 4).join(" ");
+
+    setAnalysis(result);
+    setHistory(prev => [{ code, result, title }, ...prev]);
+
+    if (updateEditor) {
       setCurrentCode(code);
-    } catch (err) {
-      console.error(err);
-      const errorResult = { raw: "Error fetching analysis" };
-      const title = code.split(/\s+/).slice(0, 4).join(" ");
-      setAnalysis(errorResult);
-      setHistory(prev => [{ code, result: errorResult, title }, ...prev]);
-      setCurrentCode(code);
-    } finally {
-      setLoading(false);
     }
-  };
 
-  const analyzeFull = async () => {
-    await analyzeCode(currentCode);
-  };
+  } catch (err) {
+    console.error(err);
+
+    const errorResult = { raw: "Error fetching analysis" };
+    const title = code.split(/\s+/).slice(0, 4).join(" ");
+
+    setAnalysis(errorResult);
+    setHistory(prev => [{ code, result: errorResult, title }, ...prev]);
+
+    if (updateEditor) {
+      setCurrentCode(code);
+    }
+
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+ const analyzeFull = async () => {
+  await analyzeCode(currentCode, true);
+};
 
   return (
     <div id="app" className="w-full h-full bg-background">
@@ -106,7 +118,11 @@ console.log(sum(2, 3));
   <div
   onClick={() => {
     if (selectedText.trim().length === 0) return; // nothing selected
-    analyzeCode(selectedText);
+     if (history.length === 0) {
+      scrollToBottom();   // 👈 scroll instantly BEFORE analysis starts
+    }
+    analyzeCode(selectedText, false);
+
   }}
 >
   <div className="container1" id="analyze-lines">
@@ -114,7 +130,7 @@ console.log(sum(2, 3));
   </div>
 </div>
 
-
+       
   <div
   onClick={() => {
     if (history.length === 0) {
