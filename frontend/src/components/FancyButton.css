@@ -1,6 +1,6 @@
-.button-container {
+/* .button-container {
   position: relative;
-  /* margin:  0 0 50px 0; */
+  margin:  0 50px ;
 }
 
 .button-border {
@@ -44,7 +44,7 @@
 
 .backdrop {
   position: absolute;
-  inset: -9900%;
+  inset: -999%;
   background: radial-gradient(
     circle at 50% 50%,
     #0000 0,
@@ -55,6 +55,11 @@
   z-index: -1;
 }
 
+.real-button:active ~ div .spin {
+  opacity: 1;
+}
+
+
 .spin {
   position: absolute;
   inset: 0;
@@ -63,27 +68,25 @@
   overflow: hidden;
   transition: 0.3s;
 }
-
-.real-button:active ~ div .spin {
-  opacity: 1;
-}
-
 .spin-blur {
-  filter: blur(2em) url(#unopaq);
+  filter: blur(0.8em) url(#unopaq);
+  border-radius: 20px;
 }
 
 .spin-intense {
-  inset: -0.125em;
-  filter: blur(0.25em) url(#unopaq2);
-  border-radius: 0.75em;
+  inset: -0.1em;
+  filter: blur(0.15em) url(#unopaq2);
+    border-radius: 20px;
+
 }
 
 .spin-inside {
-  inset: -2px;
-  border-radius: inherit;
-  filter: blur(2px) url(#unopaq3);
-  z-index: 0;
+  inset: -1px;
+  filter: blur(1px) url(#unopaq3);
+    border-radius: 20px;
+
 }
+
 
 .spin::before {
   content: "";
@@ -100,16 +103,17 @@
 }
 
 .spin-blur::before {
-  background: linear-gradient(90deg, #f50 30%, #0000 50%, #05f 70%);
+  background: linear-gradient(90deg, #a400ff 30%, #0000 50%, #a400ff 70%);
 }
 
 .spin-intense::before {
-  background: linear-gradient(90deg, #f95 20%, #0000 45% 55%, #59f 80%);
+  background: linear-gradient(90deg, #a400ff 30%, #0000 50%, #a400ff 70%);
 }
 
 .spin-inside::before {
-  background: linear-gradient(90deg, #fc9 30%, #0000 45% 55%, #9cf 70%);
+  background: linear-gradient(90deg, #a400ff 30%, #0000 50%, #a400ff 70%);
 }
+
 
 @keyframes speen {
   0% {
@@ -130,4 +134,4 @@
   50% {
     scale: 0.75;
   }
-}
+} */

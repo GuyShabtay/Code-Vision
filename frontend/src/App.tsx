@@ -30,6 +30,8 @@ type Analysis = {
 export default function App() {
   const [analysis, setAnalysis] = useState<any>({});
   const [history, setHistory] = useState<Analysis[]>([]);
+  const [selectedText, setSelectedText] = useState("");
+
   const [currentCode, setCurrentCode] = useState<string>(`
 function sum(a, b) {
   return a + b;
@@ -38,6 +40,17 @@ console.log(sum(2, 3));
 `);
   const [modalItem, setModalItem] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(false);
+  
+  const scrollToBottom = () => {
+  requestAnimationFrame(() => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  });
+};
+
+
 
   const analyzeCode = async (code: string) => {
     setLoading(true);
@@ -66,44 +79,73 @@ console.log(sum(2, 3));
   };
 
   return (
-    <div id="app" className="relative w-full h-full bg-background">
+    <div id="app" className="w-full h-full bg-background">
       <GradientBg />
      <div className="title-container">
   <Title />
 </div>
-
-<FadeOnScroll fadeStart={200} fadeEnd={150}>
+<FadeOnScroll clipLine={200}>
   <AnalaysisCards />
 </FadeOnScroll>
 
-<FadeOnScroll fadeStart={200} fadeEnd={150}>
-  <CodeEditor
-    code={currentCode}
-    onAnalyzeLines={analyzeCode}
-    onAnalyzeFull={analyzeFull}
-  />
+<FadeOnScroll clipLine={200}>
+<CodeEditor
+  code={currentCode}
+  onChange={(val) => setCurrentCode(val)}
+  onAnalyzeLines={analyzeCode}
+  onAnalyzeFull={analyzeFull}
+  onSelectedTextChange={(txt) => setSelectedText(txt)}   // 👈 NEW
+/>
+
+
 </FadeOnScroll>
 
-<FadeOnScroll fadeStart={300} fadeEnd={150}>
+<FadeOnScroll clipLine={200}>
    <div className="buttons-container">
       
-  <div onClick={analyzeFull}>
-    <FancyButton />
+  <div
+  onClick={() => {
+    if (selectedText.trim().length === 0) return; // nothing selected
+    analyzeCode(selectedText);
+  }}
+>
+  <div className="container1" id="analyze-lines">
+    <button className="button">Analyze Selected Lines</button>
   </div>
-  <div onClick={analyzeFull}>
-    <FancyButton />
+</div>
+
+
+  <div
+  onClick={() => {
+    if (history.length === 0) {
+      scrollToBottom();   // 👈 scroll instantly BEFORE analysis starts
+    }
+    analyzeFull();
+  }}
+>
+
+    <div className="container1" id='analyze-full'>
+  <button className="button">Analyze Full Code</button>
+</div>
   </div>
+ 
+
+
   </div>
 </FadeOnScroll>
 
-<FadeOnScroll fadeStart={300} fadeEnd={150}>
-  {loading ? <Loader /> : Object.keys(analysis).length > 0 ? <AnalysisPanel analysis={analysis} /> : null}
-</FadeOnScroll>
+  {loading ? (
+  <Loader />
+) : Object.keys(analysis).length > 0 ? (
+  <FadeOnScroll clipLine={200}>
+    <AnalysisPanel analysis={analysis} />
+  </FadeOnScroll>
+) : null}
 
-<FadeOnScroll fadeStart={300} fadeEnd={150}>
+
+<FadeOnScroll clipLine={200}>
   <History history={history} onSelect={setModalItem} />
 </FadeOnScroll>
-
 
 
 
@@ -122,15 +164,14 @@ console.log(sum(2, 3));
               className="modal-content"
               layoutId={`card-${history.findIndex(h => h === modalItem)}`}
             >
-              <CodeMirror
-                value={modalItem.code}
-                height="300px"
-                theme={oneDark}
-                extensions={[javascript()]}
-                onChange={(value) =>
-                  setModalItem({ ...modalItem, code: value })
-                }
-              />
+             <CodeMirror
+  value={code}
+  height="500px"
+  theme={oneDark}
+  extensions={[javascript()]}
+  onChange={(value) => onChange(value)}
+/>
+
               <AnalysisPanel analysis={modalItem.result} />
               <div className="modal-buttons">
                 <button

@@ -1,35 +1,39 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 
 type FadeOnScrollProps = {
   children: React.ReactNode;
-  fadeStart?: number; // distance from top to start fading
-  fadeEnd?: number;   // distance from top to fully disappear
+  clipLine?: number; // distance from top where the "invisible line" is
 };
 
-export default function FadeOnScroll({ children, fadeStart = 50, fadeEnd = 0 }: FadeOnScrollProps) {
+export default function FadeOnScroll({ children, clipLine = 200 }: FadeOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [opacity, setOpacity] = useState(1);
+  const [clip, setClip] = useState<string>("inset(0px 0px 0px 0px)");
 
   useEffect(() => {
     const handleScroll = () => {
       if (!ref.current) return;
-      const top = ref.current.getBoundingClientRect().top;
+      const rect = ref.current.getBoundingClientRect();
+      const top = rect.top;
 
-      if (top > fadeStart) setOpacity(1);
-      else if (top < fadeEnd) setOpacity(0);
-      else setOpacity((top - fadeEnd) / (fadeStart - fadeEnd));
+      if (top > clipLine) {
+        setClip("inset(0px 0px 0px 0px)"); // fully visible
+      } else if (top + rect.height < clipLine) {
+        setClip(`inset(${rect.height}px 0px 0px 0px)`); // fully hidden
+      } else {
+        const hiddenHeight = clipLine - top;
+        setClip(`inset(${hiddenHeight}px 0px 0px 0px)`); // partially hidden
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // initial check
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [fadeStart, fadeEnd]);
+  }, [clipLine]);
 
   return (
-    <motion.div ref={ref} style={{ opacity }}>
+    <div ref={ref} style={{ clipPath: clip, WebkitClipPath: clip }}>
       {children}
-    </motion.div>
+    </div>
   );
 }

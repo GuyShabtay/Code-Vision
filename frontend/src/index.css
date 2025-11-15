@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* body{
+  position: fixed;
+} */
 /* רקע הקוד הכללי */
 .cm-editor {
   /* background-color: rgb(213, 213, 255,0.7) !important;  */

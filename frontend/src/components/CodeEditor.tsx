@@ -7,18 +7,27 @@ import "./CodeEditor.css"; // import the CSS file
 
 type Props = {
   code: string;
-  onAnalyzeLines: (selectedCode: string) => void;
+  onChange: (value: string) => void;
+  onAnalyzeLines: (code: string) => void;
   onAnalyzeFull: () => void;
+  onSelectedTextChange: (value: string) => void;   // 👈 NEW
 };
 
-export default function CodeEditor({ code, onAnalyzeLines, onAnalyzeFull }: Props) {
+
+export default function CodeEditor({
+  code,
+  onChange,
+  onAnalyzeLines,
+  onAnalyzeFull,
+  onSelectedTextChange
+}: Props) {
   const [selectedText, setSelectedText] = useState("");
 
   return (
     <div className="code-editor-container">
       <CodeMirror
         value={code}
-        height="400px"
+        height="500px"
         theme={oneDark}
         extensions={[
           javascript(),
@@ -29,19 +38,12 @@ export default function CodeEditor({ code, onAnalyzeLines, onAnalyzeFull }: Prop
                 update.state.selection.main.to
               );
               setSelectedText(selected);
+              onSelectedTextChange(selected);     // 👈 SEND TO APP
             }
           }),
         ]}
+        onChange={(value) => onChange(value)}
       />
-
-      {/* <div className="buttons-container">
-        <button className="glass-container" id="analyze-lines-btn" onClick={() => onAnalyzeLines(selectedText)}>
-          Analyze Selected Lines
-        </button>
-        <button className="glass-container" id="analyze-full-btn" onClick={onAnalyzeFull}>
-          Analyze Full Code
-        </button>
-      </div> */}
     </div>
   );
 }

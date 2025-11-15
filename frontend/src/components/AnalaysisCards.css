@@ -4,9 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
   /* margin-top: 500px; */
   /* padding-top: 300px; */
   /* border: solid green 3px; */
+  overflow: visible;
+  padding: 70px 0;
 }
 
 /* Cards */

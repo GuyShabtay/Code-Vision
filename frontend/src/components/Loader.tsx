@@ -3,7 +3,7 @@ import './Loader.css'
 
 const Loader = () => {
   return (
-    <div>
+    <div className='loader-box'>
 <div className="loader">
   <svg width="100" height="100" viewBox="0 0 100 100">
     <defs>
