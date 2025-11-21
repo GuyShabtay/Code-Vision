@@ -14,6 +14,7 @@ import FancyButton from "./components/FancyButton";
 import Loader from "./components/Loader";
 import History from "./components/History";
 import FadeOnScroll from "./components/FadeOnScroll";
+import ResultCard from "./components/ResultCard/ResultCard";
 
 type Analysis = {
   code: string;
@@ -150,15 +151,36 @@ console.log(sum(2, 3));
   </div>
 </FadeOnScroll>
 
-  {loading ? (
+  {/* {loading ? (
   <Loader />
 ) : Object.keys(analysis).length > 0 ? (
   <FadeOnScroll clipLine={200}>
     <AnalysisPanel analysis={analysis} />
   </FadeOnScroll>
+) : null} */}
+
+{loading ? (
+  <Loader />
+) : Object.keys(analysis).length > 0 ? (
+    <div className="result-cards-container">
+      <div className="one-line">
+      <ResultCard analysis={{ summary: analysis.summary }} />
+      <ResultCard analysis={{ explanation: analysis.explanation }} />
+      </div>
+      <ResultCard
+        analysis={{
+          suggestions: analysis.suggestions,
+          improvedCode: analysis.improvedCode,
+        }}
+      />
+    </div>
 ) : null}
 
 
+
+{/* <FadeOnScroll clipLine={200}> */}
+  {/* <ResultCard/> */}
+{/* </FadeOnScroll> */}
 <FadeOnScroll clipLine={200}>
   <History history={history} onSelect={setModalItem} />
 </FadeOnScroll>

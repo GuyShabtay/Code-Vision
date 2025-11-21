@@ -31,6 +31,7 @@
   border-radius: 15px;
   overflow: auto;
   width: fit-content;
+  margin-top: 30px;
 }
 
 .raw-block {

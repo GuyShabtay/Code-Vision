@@ -44,6 +44,7 @@
   font-weight: 900;
   text-transform: uppercase;
   font-size: clamp(3rem, 10vw, 6rem);
+
   line-height: 0.75em;
   text-align: center;
   text-shadow:
