@@ -274,7 +274,7 @@ button:hover {
 
 
 /* From Uiverse.io by Spacious74 */ 
-button {
+.analyze-btn {
   font-size: 1.4em;
   padding: 20px 50px;
   border-radius: 0.5em;
@@ -358,4 +358,28 @@ button:hover {
 
 .modal-content::-webkit-scrollbar-thumb:hover {
   background: #666;
+}
+
+
+.modal-close-x {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.modal-close-x:hover {
+  color: #f44336;
+}
+#preview-main-page{
+  background: linear-gradient(90deg, rgb(129, 129, 129),white );
+  width: fit-content;
+  align-self: center;
+}
+#preview-main-page:hover button {
+    color: rgb(174, 174, 174);
+
 }

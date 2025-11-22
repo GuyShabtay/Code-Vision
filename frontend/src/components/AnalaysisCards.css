@@ -38,8 +38,9 @@
 }
 
 /* Icon */
-.container .glass svg {
-  font-size: 2.8em;
+.container .glass .analaysis-card-icon {
+  font-size: 80px;
+  color: white;
   fill: #fff;
   transition: 0.6s ease;
   z-index: 2;
@@ -93,7 +94,7 @@
 }
 
 /* Icon rises up when text appears */
-.container:hover .glass svg {
+.container:hover .glass .analaysis-card-icon {
   transform: translateY(-85px);
 }
 

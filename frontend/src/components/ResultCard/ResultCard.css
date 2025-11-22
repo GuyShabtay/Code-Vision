@@ -413,10 +413,7 @@ body {
 
 
 
-.card .light-layer {
-    top: -150px;   /* move it up */
-    height: calc(100% + 60px); /* keep full visual coverage */
-}
+
 .icon {
     position: absolute;
     top:30px !important;
@@ -503,10 +500,14 @@ body {
       }
 
       .card .light-layer {
+    top: 0px;  
+    /* height: calc(100% + 60px);  */
+    height:300px; 
     width: 300px;
     left: 50%;
     transform: translateX(-50%);
 }
+  
 
 /* .card .light-layer .slit,
 .card .light-layer .lumen,
@@ -544,4 +545,8 @@ body {
                 0 0 0 1px white, /* changed border color */
                 0 4px 4px 0 #0004, 
                 0 0 0 1px #333;    /* optional second border color */
+}
+
+.google-icon{
+  font-size: 70px;
 }

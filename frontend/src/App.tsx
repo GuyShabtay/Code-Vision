@@ -127,7 +127,7 @@ console.log(sum(2, 3));
   }}
 >
   <div className="container1" id="analyze-lines">
-    <button className="button">Analyze Selected Lines</button>
+    <button className="analyze-btn">Analyze Selected Lines</button>
   </div>
 </div>
 
@@ -142,7 +142,7 @@ console.log(sum(2, 3));
 >
 
     <div className="container1" id='analyze-full'>
-  <button className="button">Analyze Full Code</button>
+  <button className="analyze-btn">Analyze Full Code</button>
 </div>
   </div>
  
@@ -190,54 +190,71 @@ console.log(sum(2, 3));
 
 
       {/* Modal */}
-      <AnimatePresence>
-        {modalItem && (
-          <motion.div
-            className="modal-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+   <AnimatePresence>
+  {modalItem && (
+    <motion.div
+      className="modal-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setModalItem(null)} // click outside closes modal
+    >
+      <motion.div
+        className="modal-content"
+        layoutId={`card-${history.findIndex(h => h === modalItem)}`}
+        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+      >
+        {/* Top-right X button */}
+                  <span onClick={() => setModalItem(null)} className="modal-close-x material-icons-round">close</span>
+
+
+        <CodeMirror
+          style={{ boxShadow: '0 3px 10px rgba(255, 255, 255, 0.2)' }}
+          value={modalItem.code}
+          height="500px"
+          theme={oneDark}
+          extensions={[javascript()]}
+          onChange={(value) =>
+            setModalItem(prev => prev ? { ...prev, code: value } : prev)
+          }
+        />
+
+        <AnalysisPanel analysis={modalItem.result} />
+
+        {/* <div className="modal-buttons">
+          <button
+            className="analyze-modal-btn"
+            onClick={() => {
+              if (!modalItem) return;
+              // Set the main page data to modal data
+              setCurrentCode(modalItem.code);
+              setAnalysis(modalItem.result);
+              setModalItem(null); // close modal
+            }}
           >
-            <motion.div
-              className="modal-content"
-              layoutId={`card-${history.findIndex(h => h === modalItem)}`}
-            >
-             <CodeMirror style={{  boxShadow: '0 3px 10px rgba(255, 255, 255, 0.2)' }}
-  value={modalItem.code}
-  height="500px"
-  theme={oneDark}
-  extensions={[javascript()]}
-  onChange={(value) =>
-    setModalItem(prev =>
-      prev ? { ...prev, code: value } : prev
-    )
-  }
-/>
+            Preview in Main Page
+          </button>
+        </div> */}
+        <div className="container1" id='preview-main-page'>
+  <button className="analyze-btn"
+            onClick={() => {
+              if (!modalItem) return;
+              // Set the main page data to modal data
+              setCurrentCode(modalItem.code);
+              setAnalysis(modalItem.result);
+              setModalItem(null); // close modal
+            }}
+          >
+            Preview in Main Page
+            
+            </button>
+</div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
-<AnalysisPanel analysis={modalItem.result} />
 
-              <div className="modal-buttons">
-                <button
-                  className="analyze-modal-btn"
-                  onClick={async () => {
-                    if (!modalItem) return;
-                    await analyzeCode(modalItem.code);
-                    setModalItem(null);
-                  }}
-                >
-                  Analyze & Continue
-                </button>
-                <button
-                  className="close-modal-btn"
-                  onClick={() => setModalItem(null)}
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
