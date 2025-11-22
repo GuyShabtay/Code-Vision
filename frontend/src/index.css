@@ -32,7 +32,7 @@
 
 /* רקע של מספר השורה בפוקוס */
 .cm-gutters .cm-activeLineGutter {
-  background-color: #fde68a !important; /* צהוב כהה יותר להדגשה */
+  background-color: #7275fe !important; /* צהוב כהה יותר להדגשה */
   color: #000000 !important;            /* מספר השורה שחור */
   font-weight: bold;
                      

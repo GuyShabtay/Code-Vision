@@ -14,7 +14,7 @@ const ResultCard = ({ analysis }: Props) => {
   const [active, setActive] = useState(false);
 
   return (
- <div
+    <div
   className={`card ${
     analysis.summary
       ? 'summary-card'
@@ -30,6 +30,7 @@ const ResultCard = ({ analysis }: Props) => {
     width: analysis.suggestions ? '86vw' : '40vw'
   }}
 >
+  <div className="card-box">
 
 
       <div className="light-layer">
@@ -88,6 +89,7 @@ const ResultCard = ({ analysis }: Props) => {
             <div className="handle"></div>
             <span>Activate Lumen</span>
           </div>
+    </div>
     </div>
   );
 };

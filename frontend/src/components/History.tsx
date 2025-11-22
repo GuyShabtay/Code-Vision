@@ -20,10 +20,12 @@ const History: React.FC<HistoryProps> = ({ history, onSelect }) => {
 
   return (
     <div className="history-list">
-      <h3>History:</h3>
+      <h4>History</h4>
       <div className="history-cards">
         {history.map((item, idx) => (
           <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
             key={idx}
             layoutId={`card-${idx}`}
             className="history-card"

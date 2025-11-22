@@ -202,15 +202,20 @@ console.log(sum(2, 3));
               className="modal-content"
               layoutId={`card-${history.findIndex(h => h === modalItem)}`}
             >
-             <CodeMirror
-  value={code}
+             <CodeMirror style={{  boxShadow: '0 3px 10px rgba(255, 255, 255, 0.2)' }}
+  value={modalItem.code}
   height="500px"
   theme={oneDark}
   extensions={[javascript()]}
-  onChange={(value) => onChange(value)}
+  onChange={(value) =>
+    setModalItem(prev =>
+      prev ? { ...prev, code: value } : prev
+    )
+  }
 />
 
-              <AnalysisPanel analysis={modalItem.result} />
+<AnalysisPanel analysis={modalItem.result} />
+
               <div className="modal-buttons">
                 <button
                   className="analyze-modal-btn"

@@ -42,9 +42,9 @@
 }
 
 
-.history-list h3 {
+.history-list h4 {
   margin-bottom: 15px;
-  font-size: 22px;
+  font-size: 28px;
   color: white;
   text-align: center;
 }
@@ -82,20 +82,11 @@
 /* .history-cards { display: flex; gap: 10px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; } */
 
 
-.history-card {
-  min-width: 250px;
-  max-width: 300px;
-  cursor: pointer;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  background: rgba(255,255,255,0.05);
-  transition: transform 0.2s;
-}
 
-.history-card:hover {
+
+/* .history-card:hover {
   transform: scale(1.05);
-}
+} */
 
 /* Modal */
 .modal-backdrop {
@@ -109,7 +100,11 @@
 }
 
 .modal-content {
-  background: rgba(30,30,30,0.95);
+  /* background: rgba(30,30,30,0.95); */
+  /* background: #24242f; */
+
+  	background: radial-gradient(circle at 50% 0%, #24242f 0%, #1a1a1acf 100%);
+
   padding: 20px;
   border-radius: 12px;
   max-width: 800px;
@@ -118,6 +113,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
   gap: 15px;
 }
 
@@ -146,6 +142,7 @@
 }
 
 
+
 .history-card {
   min-width: 250px;
   max-width: 300px;
@@ -153,7 +150,10 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(50px);
+    
+
   display: flex;
   flex-direction: column;
 }
@@ -333,3 +333,29 @@ button:hover {
 }
 
 
+
+
+
+/* Make modal scrollbars dark */
+.modal-content {
+  scrollbar-width: thin;          /* Firefox */
+  scrollbar-color: #444 #1a1a1a;  /* Firefox: thumb | track */
+}
+
+/* For Chrome, Edge, Safari */
+.modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

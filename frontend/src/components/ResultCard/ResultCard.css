@@ -34,7 +34,13 @@ body {
 	height: 100vh;
 	overflow: hidden;
 } */
+.card-box{
+    overflow: hidden;
+    border: 3px solid green;
+    height: 100%;
+    width: 100%;
 
+}
 .card {
 	position: relative;
 	background: radial-gradient(circle at 50% 0%, #24242f 0%, #1a1a1a7c 64%);
@@ -291,7 +297,7 @@ body {
 				/* color: #fff4; */
 				font-size: 18px;
 				/* font-weight: 100; */
-				border-bottom: 1px solid #fff1;
+				/* border-bottom: 1px solid #fff1; */
 				/* max-width: 64%; */
 			}
 			.toggle {
