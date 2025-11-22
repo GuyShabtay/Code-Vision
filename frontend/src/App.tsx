@@ -162,6 +162,8 @@ console.log(sum(2, 3));
 {loading ? (
   <Loader />
 ) : Object.keys(analysis).length > 0 ? (
+  <FadeOnScroll clipLine={200}>
+
     <div className="result-cards-container">
       <div className="one-line">
       <ResultCard analysis={{ summary: analysis.summary }} />
@@ -174,6 +176,8 @@ console.log(sum(2, 3));
         }}
       />
     </div>
+    </FadeOnScroll>
+
 ) : null}
 
 

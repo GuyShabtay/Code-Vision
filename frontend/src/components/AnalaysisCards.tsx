@@ -60,7 +60,7 @@ const AnalaysisCards = () => {
         <div className="card-text">
           <div className="text-bg"></div>
           <h2>Summary</h2>
-          <p>Get a quick summary & explanation</p>
+          <p>Get summary & explanation of the code</p>
           {/* <h2>Code</h2>
           <p>Analyze & Improve code</p> */}
         </div>

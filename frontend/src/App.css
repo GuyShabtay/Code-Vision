@@ -106,7 +106,7 @@
   	background: radial-gradient(circle at 50% 0%, #24242f 0%, #1a1a1acf 100%);
 
   padding: 20px;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   max-width: 800px;
   width: 90%;
   max-height: 90%;
@@ -336,29 +336,7 @@ button:hover {
 
 
 
-/* Make modal scrollbars dark */
-.modal-content {
-  scrollbar-width: thin;          /* Firefox */
-  scrollbar-color: #444 #1a1a1a;  /* Firefox: thumb | track */
-}
 
-/* For Chrome, Edge, Safari */
-.modal-content::-webkit-scrollbar {
-  width: 10px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 8px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: #666;
-}
 
 
 .modal-close-x {
