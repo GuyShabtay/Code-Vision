@@ -15,6 +15,8 @@ import Loader from "./components/Loader";
 import History from "./components/History";
 import FadeOnScroll from "./components/FadeOnScroll";
 import ResultCard from "./components/ResultCard/ResultCard";
+import { toast, Toaster } from 'sonner';
+
 
 type Analysis = {
   code: string;
@@ -67,6 +69,7 @@ console.log(sum(2, 3));
     if (updateEditor) {
       setCurrentCode(code);
     }
+    toast.success("Code analysis finished successfully")
 
   } catch (err) {
     console.error(err);
@@ -80,6 +83,7 @@ console.log(sum(2, 3));
     if (updateEditor) {
       setCurrentCode(code);
     }
+    toast.error("Something went wrong during the analysis")
 
   } finally {
     setLoading(false);
@@ -118,7 +122,12 @@ console.log(sum(2, 3));
       
   <div
   onClick={() => {
-    if (selectedText.trim().length === 0) return; // nothing selected
+    if (selectedText.trim().length === 0)
+      {
+            toast.error("Please select at least one line to analyze")
+
+        return; // nothing selected
+      } 
      if (history.length === 0) {
       scrollToBottom();   // 👈 scroll instantly BEFORE analysis starts
     }
@@ -247,6 +256,8 @@ console.log(sum(2, 3));
               setCurrentCode(modalItem.code);
               setAnalysis(modalItem.result);
               setModalItem(null); // close modal
+                  toast.info("Preview updated on the main page")
+
             }}
           >
             Preview in Main Page
@@ -257,8 +268,11 @@ console.log(sum(2, 3));
     </motion.div>
   )}
 </AnimatePresence>
-
-
+      {/* <Toaster
+       position="bottom-right"
+        richColors
+        theme="dark"
+         /> */}
     </div>
   );
 }

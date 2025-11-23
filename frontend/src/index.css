@@ -6,7 +6,7 @@
 .one-line{
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch; /* default, but added for clarity */
   gap: 6vw;
   margin: 50px 0;
 }

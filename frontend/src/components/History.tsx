@@ -22,7 +22,7 @@ const History: React.FC<HistoryProps> = ({ history, onSelect }) => {
     <div className="history-list">
       <h4>History</h4>
       <div className="history-cards">
-        {history.map((item, idx) => (
+        {history.reverse().map((item, idx) => (
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}

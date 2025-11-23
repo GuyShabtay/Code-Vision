@@ -10,6 +10,7 @@
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   /* width: 90%; */
   margin: 30px auto;
+  width: 90%;
 }
 
 .section-title {
@@ -23,10 +24,8 @@
 }
 
 .code-block {
-  /* background-color: #151519; */
-    /* background: linear-gradient(-142deg, #313142 0%, #050505 100%); */
     background: linear-gradient(150deg, #313142 0%, #050505 100%);
-max-width: 90%;
+max-width: 100%;
   color: white;
   padding: 10px 20px;
   border-radius: 15px;
@@ -34,6 +33,9 @@ max-width: 90%;
   width: fit-content;
   margin-top: 30px;
 }
+/* .card .code-block {
+margin-bottom: 70px;
+} */
 
 .raw-block {
   background-color: #111111;

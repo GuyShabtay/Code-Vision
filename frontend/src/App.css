@@ -16,7 +16,6 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  /* border: 3px solid red; */
 
 }
 
@@ -97,6 +96,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  /* width: 100vw;
+  height: 100vh; */
 }
 
 .modal-content {
@@ -107,8 +108,8 @@
 
   padding: 20px;
   /* border-radius: 12px; */
-  max-width: 800px;
-  width: 90%;
+  /* max-width: 800px; */
+  width: 70%;
   max-height: 90%;
   overflow-y: auto;
   display: flex;
@@ -330,6 +331,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 50px;
+  margin: 30px;
 }
 
 

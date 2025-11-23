@@ -48,11 +48,11 @@ body {
 		inset 0 -1.01rem 0.2rem -1rem #0000, 0 -1.02rem 0.2rem -1rem #fff0,
 		0 1rem 0.2rem -1rem #0000, 0 0 0 1px #fff3, 0 4px 4px 0 #0004, 0 0 0 1px #333;
 	width: 40vw;
-	height: fit-content;
-  min-height: 450px;
+	/* height: fit-content; */
+  /* min-height: 450px; */
 	border-radius: 1.8rem;
 	color: #fff;
-	padding: 1rem;
+	padding: 1rem 1rem 70px 1rem;
 	display: flex;
 	flex-direction: column;
   /* overflow: hidden; */
