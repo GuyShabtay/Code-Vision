@@ -44,9 +44,15 @@ Return everything in JSON format with fields:
 console.log(parsed)
     res.json(parsed);
   } catch (err) {
-    console.error("OpenAI error:", err);
-    res.status(500).json({ error: err.message });
+  if (err instanceof Error) {
+    console.error(err.message);
+    return res.status(500).json({ error: err.message });
   }
+
+  // fallback (non-Error values)
+  return res.status(500).json({ error: "Unknown error occurred" });
+}
+
 });
 
 
