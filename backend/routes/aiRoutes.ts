@@ -31,7 +31,6 @@ Return everything in JSON format with fields:
 
     let responseText = completion.choices[0].message?.content || "{}";
 
-    // הסרת backticks אם קיימים
     responseText = responseText.replace(/^```json\s*|\s*```$/g, "").trim();
 
     let parsed;
@@ -39,7 +38,7 @@ Return everything in JSON format with fields:
       parsed = JSON.parse(responseText);
     } catch (parseErr) {
       console.warn("Failed to parse JSON, sending raw response:", parseErr);
-      parsed = { raw: responseText }; // במקום לקרוס, שולח את הטקסט הגולמי
+      parsed = { raw: responseText }; 
     }
 console.log(parsed)
     res.json(parsed);
@@ -57,11 +56,8 @@ console.log(parsed)
 
 // Wake-up endpoint
 router.get('/wakeup', (req, res) => {
-  // console.log('first')
   res.status(200).send('Server is awake!');
-  //   setTimeout(() => {
-  //   res.status(200).send('Server is awake!');
-  // }, 5000); // 5000ms = 5 seconds
+ 
 });
 
 export default router;

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import './History.css'
 
 type Analysis = {
   code: string;

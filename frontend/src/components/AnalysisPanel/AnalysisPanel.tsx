@@ -1,5 +1,5 @@
 import React from "react";
-import "./AnalysisPanel.css"; // import the CSS file
+import "./AnalysisPanel.css"; 
 
 type Props = {
   analysis: {

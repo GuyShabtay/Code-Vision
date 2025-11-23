@@ -1,0 +1,66 @@
+.history-list {
+  width: 90vw;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  padding: 15px;
+  border-radius: 12px;
+  background: transparent;
+    backdrop-filter: blur(20px);
+      box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+.history-list h4 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  color: white;
+  text-align: center;
+}
+
+
+.history-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-item {
+  padding: 5px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.history-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.history-card {
+  min-width: 250px;
+  max-width: 300px;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(50px);
+  display: flex;
+  flex-direction: column;
+}
+
+.history-card-title {
+  background: #0a0a0a;
+  color: white;
+  font-weight: 500;
+  padding: 5px 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -10,7 +10,7 @@ type Props = {
   onChange: (value: string) => void;
   onAnalyzeLines: (code: string) => void;
   onAnalyzeFull: () => void;
-  onSelectedTextChange: (value: string) => void;   // 👈 NEW
+  onSelectedTextChange: (value: string) => void;  
 };
 
 
@@ -38,7 +38,7 @@ export default function CodeEditor({
                 update.state.selection.main.to
               );
               setSelectedText(selected);
-              onSelectedTextChange(selected);     // 👈 SEND TO APP
+              onSelectedTextChange(selected);     
             }
           }),
         ]}

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import CodeEditor from "./components/CodeEditor";
-import AnalysisPanel from "./components/AnalysisPanel";
+import CodeEditor from "./components/CodeEditor/CodeEditor";
+import AnalysisPanel from "./components/AnalysisPanel/AnalysisPanel";
 import axios from "axios";
 import GradientBg from "./components/GradientBg";
-import AnalaysisCards from "./components/AnalaysisCards";
+import AnalaysisCards from "./components/AnalaysisCards/AnalaysisCards";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { motion, AnimatePresence } from "framer-motion";
 import './App.css';
-import Title from "./components/Title";
-import FancyButton from "./components/FancyButton";
-import Loader from "./components/Loader";
-import History from "./components/History";
+import Title from "./components/Title/Title";
+import Loader from "./components/Loader/Loader";
+import History from "./components/History/History";
 import FadeOnScroll from "./components/FadeOnScroll";
 import ResultCard from "./components/ResultCard/ResultCard";
 import { toast, Toaster } from 'sonner';
@@ -131,7 +130,7 @@ console.log(sum(2, 3));
   onChange={(val) => setCurrentCode(val)}
   onAnalyzeLines={analyzeCode}
   onAnalyzeFull={analyzeFull}
-  onSelectedTextChange={(txt) => setSelectedText(txt)}   // 👈 NEW
+  onSelectedTextChange={(txt) => setSelectedText(txt)}  
 />
 
 
@@ -149,13 +148,13 @@ console.log(sum(2, 3));
         return; // nothing selected
       } 
      if (history.length === 0) {
-      scrollToBottom();   // 👈 scroll instantly BEFORE analysis starts
+      scrollToBottom();   //  scroll instantly BEFORE analysis starts
     }
     analyzeCode(selectedText, false);
 
   }}
 >
-  <div className="container1" id="analyze-lines">
+  <div className="main-btn" id="analyze-lines">
     <button className="analyze-btn">Analyze Selected Lines</button>
   </div>
 </div>
@@ -164,13 +163,13 @@ console.log(sum(2, 3));
   <div
   onClick={() => {
     if (history.length === 0) {
-      scrollToBottom();   // 👈 scroll instantly BEFORE analysis starts
+      scrollToBottom();   //  scroll instantly BEFORE analysis starts
     }
     analyzeFull();
   }}
 >
 
-    <div className="container1" id='analyze-full'>
+    <div className="main-btn" id='analyze-full'>
   <button className="analyze-btn">Analyze Full Code</button>
 </div>
   </div>
@@ -187,13 +186,6 @@ console.log(sum(2, 3));
 
 </FadeOnScroll>
 
-  {/* {loading ? (
-  <Loader />
-) : Object.keys(analysis).length > 0 ? (
-  <FadeOnScroll clipLine={200}>
-    <AnalysisPanel analysis={analysis} />
-  </FadeOnScroll>
-) : null} */}
 
 {loading ? (
   <Loader />
@@ -216,11 +208,6 @@ console.log(sum(2, 3));
 
 ) : null}
 
-
-
-{/* <FadeOnScroll clipLine={200}> */}
-  {/* <ResultCard/> */}
-{/* </FadeOnScroll> */}
 <FadeOnScroll clipLine={200}>
   <History history={history} onSelect={setModalItem} />
 </FadeOnScroll>
@@ -229,7 +216,6 @@ console.log(sum(2, 3));
 
 
 
-      {/* Modal */}
    <AnimatePresence>
   {modalItem && (
     <motion.div
@@ -244,10 +230,7 @@ console.log(sum(2, 3));
         layoutId={`card-${history.findIndex(h => h === modalItem)}`}
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
       >
-        {/* Top-right X button */}
                   <span onClick={() => setModalItem(null)} className="modal-close-x material-icons-round">close</span>
-
-
         <CodeMirror
           style={{ boxShadow: '0 3px 10px rgba(255, 255, 255, 0.2)' }}
           value={modalItem.code}
@@ -261,28 +244,13 @@ console.log(sum(2, 3));
 
         <AnalysisPanel analysis={modalItem.result} />
 
-        {/* <div className="modal-buttons">
-          <button
-            className="analyze-modal-btn"
-            onClick={() => {
-              if (!modalItem) return;
-              // Set the main page data to modal data
-              setCurrentCode(modalItem.code);
-              setAnalysis(modalItem.result);
-              setModalItem(null); // close modal
-            }}
-          >
-            Preview in Main Page
-          </button>
-        </div> */}
-        <div className="container1" id='preview-main-page'>
+        <div className="main-btn" id='preview-main-page'>
   <button className="analyze-btn"
             onClick={() => {
               if (!modalItem) return;
-              // Set the main page data to modal data
               setCurrentCode(modalItem.code);
               setAnalysis(modalItem.result);
-              setModalItem(null); // close modal
+              setModalItem(null); 
                   toast.info("Preview updated on the main page")
 
             }}
@@ -295,11 +263,6 @@ console.log(sum(2, 3));
     </motion.div>
   )}
 </AnimatePresence>
-      {/* <Toaster
-       position="bottom-right"
-        richColors
-        theme="dark"
-         /> */}
     </div>
   );
 }

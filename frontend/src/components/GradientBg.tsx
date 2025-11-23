@@ -1,11 +1,8 @@
 "use client";
 import React from "react";
-import { FloatingDots } from "./ui/floating-dots";
-// import { useTheme } from "next-themes";
+import { FloatingDots } from "./floating-dots";
 
 const GradientBg = () => {
-  // const { theme } = useTheme();
-  // const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
   return (
   <div className="fixed inset-0 -z-10 w-full h-screen bg-[#050505] overflow-hidden">
