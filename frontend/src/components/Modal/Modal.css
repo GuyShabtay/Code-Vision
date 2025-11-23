@@ -1,0 +1,57 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  	background: radial-gradient(circle at 50% 0%, #24242f 0%, #1a1a1acf 100%);
+  padding: 20px;
+  width: 70%;
+  max-height: 90%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.close-modal-btn {
+  background: #f44336;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modal-close-x {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.modal-close-x:hover {
+  color: #f44336;
+}
+#preview-main-page{
+  background: linear-gradient(90deg, rgb(129, 129, 129),white );
+  width: fit-content;
+  align-self: center;
+}
+#preview-main-page:hover button {
+    color: rgb(174, 174, 174);
+
+}
