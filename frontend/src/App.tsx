@@ -58,7 +58,7 @@ console.log(sum(2, 3));
   const analyzeCode = async (code: string, updateEditor: boolean = true) => {
   setLoading(true);
   try {
-    const res = await axios.post("http://localhost:5001/api/ai/analyze", { code });
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/ai/analyze`, { code });
     const result = res.data;
 
     const title = code.split(/\s+/).slice(0, 4).join(" ");
