@@ -10,6 +10,7 @@
     "openai": "^6.8.1"
   },
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/index.ts",
     "start": "tsx index.ts"
