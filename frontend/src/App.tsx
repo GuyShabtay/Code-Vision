@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CodeEditor from "./components/CodeEditor";
 import AnalysisPanel from "./components/AnalysisPanel";
 import axios from "axios";
@@ -35,7 +35,7 @@ export default function App() {
   const [history, setHistory] = useState<Analysis[]>([]);
   const [selectedText, setSelectedText] = useState("");
 
-  const [currentCode, setCurrentCode] = useState<string>(`
+  const [currentCode, setCurrentCode] = useState<string>(`//Example Code
 function sum(a, b) {
   return a + b;
 }
@@ -43,6 +43,8 @@ console.log(sum(2, 3));
 `);
   const [modalItem, setModalItem] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(false);
+  const [serverLoading, setServerLoading] = useState(true);
+
   
   const scrollToBottom = () => {
   requestAnimationFrame(() => {
@@ -52,7 +54,25 @@ console.log(sum(2, 3));
     });
   });
 };
+ useEffect(() => {
+    sessionStorage.clear();
 
+    // Wake up server
+    const wakeUpServer = async () => {
+      try {
+        await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ai/wakeup`); // create a lightweight endpoint
+        toast.success('Server is awake!')
+
+      } catch (err) {
+        toast.error('Failed to wake up server')
+
+      } finally {
+        setServerLoading(false);
+      }
+    };
+
+    wakeUpServer();
+  }, []);
 
 
   const analyzeCode = async (code: string, updateEditor: boolean = true) => {
@@ -158,6 +178,13 @@ console.log(sum(2, 3));
 
 
   </div>
+   {serverLoading && (
+          <div className='server-status'>
+            <p>Waking up the server, please wait...</p>
+            <div className="server-loader"></div>
+          </div>
+        )}
+
 </FadeOnScroll>
 
   {/* {loading ? (

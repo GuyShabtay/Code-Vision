@@ -55,6 +55,13 @@ console.log(parsed)
 
 });
 
-
+// Wake-up endpoint
+router.get('/wakeup', (req, res) => {
+  // console.log('first')
+  res.status(200).send('Server is awake!');
+  //   setTimeout(() => {
+  //   res.status(200).send('Server is awake!');
+  // }, 5000); // 5000ms = 5 seconds
+});
 
 export default router;
