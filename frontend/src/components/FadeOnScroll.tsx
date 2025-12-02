@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 type FadeOnScrollProps = {
   children: React.ReactNode;
-  clipLine?: number; // distance from top where the "invisible line" is
+  clipLine?: number;
 };
 
 export default function FadeOnScroll({ children, clipLine = 200 }: FadeOnScrollProps) {

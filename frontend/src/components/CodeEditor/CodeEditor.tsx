@@ -3,7 +3,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { EditorView } from "@codemirror/view";
-import "./CodeEditor.css"; // import the CSS file
+import "./CodeEditor.css"; 
 
 type Props = {
   code: string;

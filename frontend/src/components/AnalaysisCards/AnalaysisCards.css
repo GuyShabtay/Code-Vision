@@ -1,18 +1,13 @@
-/* Container */
 .container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  /* margin-top: 500px; */
-  /* padding-top: 300px; */
-  /* border: solid green 3px; */
   overflow: visible;
   padding: 70px 0;
 }
 
-/* Cards */
 .container .glass {
   position: relative;
   width: 350px;
@@ -31,13 +26,11 @@
   overflow: hidden;
 }
 
-/* Hover unlock rotation and spacing */
 .container:hover .glass {
   transform: rotate(0deg);
   margin: 0 10px;
 }
 
-/* Icon */
 .container .glass .analaysis-card-icon {
   font-size: 80px;
   color: white;
@@ -46,13 +39,12 @@
   z-index: 2;
 }
 
-/* TEXT WRAPPER */
 .card-text {
   position: absolute;
   top: 60%;
   left: 50%;
   width: 90%;
-  transform: translate(-50%, 30px); /* start lower */
+  transform: translate(-50%, 30px); 
   text-align: center;
   color: white;
   opacity: 0;
@@ -61,7 +53,6 @@
   z-index: 3;
 }
 
-/* Background blur behind text */
 .text-bg {
   position: absolute;
   width: 100%;
@@ -72,33 +63,28 @@
   z-index: -1;
 }
 
-/* Title */
 .card-text h2 {
   font-size: 26px;
   margin: 0;
   font-weight: 700;
 }
 
-/* Subtitle */
 .card-text p {
   font-size: 15px;
   opacity: 0.85;
   margin-top: 8px;
 }
 
-/* ON HOVER → text appears from below */
 .container:hover .glass .card-text {
   opacity: 1;
   filter: blur(0);
-  transform: translate(-50%, -50%); /* final position */
+  transform: translate(-50%, -50%); 
 }
 
-/* Icon rises up when text appears */
 .container:hover .glass .analaysis-card-icon {
   transform: translateY(-85px);
 }
 
-/* Bottom small label */
 .container .glass::before {
   content: attr(data-text);
   position: absolute;
@@ -113,7 +99,6 @@
   font-weight: 600;
 }
 
-/* Rotation offsets */
 .github {
   --r: -15;
 }

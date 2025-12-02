@@ -7,7 +7,6 @@ const Title = () => {
   <div className="title-wrapper">
     <h1 className="sweet-title">
       <span data-text="Code Vision">Code Vision</span>
-      {/* <span data-text="Vision">Vision</span>  */}
     </h1>
     </div>
 </section>

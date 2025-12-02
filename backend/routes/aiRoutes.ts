@@ -6,7 +6,6 @@ dotenv.config();
 
 const router = express.Router();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-console.log(process.env.OPENAI_API_KEY)
 router.post("/analyze", async (req, res) => {
   try {
     const { code } = req.body;
@@ -40,7 +39,6 @@ Return everything in JSON format with fields:
       console.warn("Failed to parse JSON, sending raw response:", parseErr);
       parsed = { raw: responseText }; 
     }
-console.log(parsed)
     res.json(parsed);
   } catch (err) {
   if (err instanceof Error) {
@@ -48,7 +46,6 @@ console.log(parsed)
     return res.status(500).json({ error: err.message });
   }
 
-  // fallback (non-Error values)
   return res.status(500).json({ error: "Unknown error occurred" });
 }
 
