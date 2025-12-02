@@ -57,7 +57,8 @@ console.log(sum(2, 3));
     // Wake up server
     const wakeUpServer = async () => {
       try {
-        await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ai/wakeup`); // create a lightweight endpoint
+        const response =await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ai/wakeup`); 
+        console.log('response.data',response.data)
         toast.success('Server is awake!')
 
       } catch (err) {
@@ -67,7 +68,6 @@ console.log(sum(2, 3));
         setServerLoading(false);
       }
     };
-
     wakeUpServer();
   }, []);
 
@@ -144,6 +144,12 @@ console.log(sum(2, 3));
   />
 </FadeOnScroll>
 
+{serverLoading && (
+                <div className="server-status">
+                  <p>Waking up the server, please wait...</p>
+                  <div className="server-loader"></div>
+                </div>
+              )}
 
 
 {loading ? (

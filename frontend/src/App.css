@@ -16,10 +16,9 @@
 
 }
 .server-status p{
-    color: white;
+    color: white ;
     font-size: 22px;
     text-align: center;
-    margin-top: 20px;
 }
 .server-loader {
     margin: 20px auto 0 auto;
